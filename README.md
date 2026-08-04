@@ -102,55 +102,6 @@ SoilSync
 
 ---
 
-## ⚙ Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/NahidulIslam77/SoilSync.git
-```
-
-### Move to XAMPP
-
-```
-htdocs/SoilSync
-```
-
-### Import Database
-
-Import
-
-```
-soilsync.sql
-```
-
-using phpMyAdmin.
-
-### Configure Database
-
-Open
-
-```
-db.php
-```
-
-and update your database credentials if needed.
-
-### Start Server
-
-Start
-
-- Apache
-- MySQL
-
-Visit
-
-```
-http://localhost/SoilSync
-```
-
----
-
 
 ## 📌 Future Improvements
 
