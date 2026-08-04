@@ -1,3 +1,31 @@
 .env
 /vendor
 /node_modules
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Temporary Files
+*.tmp
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# XAMPP
+xampp-control.ini
+
+# Environment Files
+.env
+
+# Cache
+.cache/
+
+# Composer
+/vendor/
+
+# Node
+node_modules/
