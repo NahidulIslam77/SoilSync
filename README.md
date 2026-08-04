@@ -151,34 +151,6 @@ http://localhost/SoilSync
 
 ---
 
-## 🖼 Screenshots
-
-(Add screenshots here)
-
-- Home Page
-- Farmer Dashboard
-- Expert Dashboard
-- Crop Recommendation
-- Pest Report
-- Disease Detection
-- Market Prices
-- Outbreak Heatmap
-
----
-
-## 🎨 UI/UX Design
-
-Designed using **Figma** before development.
-
-**Figma Design**
-
-(Add your design link)
-
-**Interactive Prototype**
-
-(Add your prototype link)
-
----
 
 ## 📌 Future Improvements
 
@@ -190,19 +162,5 @@ Designed using **Figma** before development.
 - AI Chatbot
 - IoT Sensor Integration
 
----
-
-## 👨‍💻 Developer
-
-**Nahidul Islam**
-
-BSc in Computer Science & Engineering
-
-United International University
-
-GitHub:
-https://github.com/NahidulIslam77
-
----
 
 ## ⭐ If you found this project useful, please consider giving it a star.
