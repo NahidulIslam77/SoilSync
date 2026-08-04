@@ -2,6 +2,12 @@
 // ============================================================
 // SoilSync — db.php
 // ============================================================
+
+// Load language system first (before session starts)
+if (!function_exists('t')) {
+    require_once __DIR__ . '/lang.php';
+}
+
 loadEnv(__DIR__ . '/.env');
 $env = parse_ini_file('.env');
 

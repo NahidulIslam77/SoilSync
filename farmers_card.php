@@ -14,15 +14,6 @@ $user   = currentUser($conn);
 $uid    = (int)$user['id'];
 $locId  = (int)($user['location_id'] ?? 0);
 
-/* ── AUTO-MIGRATE: add farmers card columns if missing ─────── */
-$conn->query("ALTER TABLE users
-    ADD COLUMN IF NOT EXISTS fc_card_number    varchar(20)  DEFAULT NULL,
-    ADD COLUMN IF NOT EXISTS fc_category       enum('landless','marginal','small','medium','large') DEFAULT NULL,
-    ADD COLUMN IF NOT EXISTS fc_land_size      decimal(8,2) DEFAULT NULL,
-    ADD COLUMN IF NOT EXISTS fc_bank_account   varchar(30)  DEFAULT NULL,
-    ADD COLUMN IF NOT EXISTS fc_registered_at  datetime     DEFAULT NULL,
-    ADD COLUMN IF NOT EXISTS fc_phase          enum('pre_pilot','pilot','national') DEFAULT NULL
-");
 
 /* ── RE-FETCH user with new columns ────────────────────────── */
 $userRow = $conn->query("SELECT * FROM users WHERE id=$uid")->fetch_assoc();

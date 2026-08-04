@@ -70,7 +70,7 @@ $clusters = [];
 while ($r = $reports->fetch_assoc()) {
 
     $groupKey =
-        strtolower(trim($r['district'])) . '_' .
+        strtolower(trim($r['district'] ?? '')) . '_' .
         $r['crop_id'] . '_' .
         $r['pest_id'];
 
@@ -160,7 +160,7 @@ foreach ($finalClusters as $c) {
     if ($c['count'] < 10) continue;
 
     $key =
-        strtolower(trim($c['district'])) . '_' .
+         strtolower(trim($c['district'] ?? '')) . '_' .
         $c['crop_id'] . '_' .
         $c['pest_id'];
 

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->query("INSERT INTO questions (user_id, question, category, tags, is_public, image_url)
             VALUES ($uid, '$question', '$category', '$tags', $is_public, '$image_path')");
         $conn->query("INSERT INTO notifications (user_id, title, message, type)
-            VALUES ($uid, 'Question Submitted', 'Your question has been submitted successfully.', 'faq')");
+            VALUES ($uid, 'Question Submitted', 'Your question has been submitted successfully.', 'advisory')");
     }
 }
 

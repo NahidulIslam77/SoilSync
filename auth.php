@@ -5,7 +5,7 @@ if (isLoggedIn()) {
   if ($_SESSION['user_role'] === 'expert') {
       header('Location: expert_dashboard.php');
   } elseif ($_SESSION['user_role'] === 'admin') {
-      header('Location: admin_dashboard.php');
+      header('Location: admin.php');
   } else {
       header('Location: dashboard.php');
   }
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action'])) {
     if ($u['role'] === 'expert') {
         header('Location: expert_dashboard.php');
     } elseif ($u['role'] === 'admin') {
-        header('Location: admin_dashboard.php');
+        header('Location: admin.php');
     } else {
         header('Location: dashboard.php');
     }

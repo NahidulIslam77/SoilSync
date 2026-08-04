@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $conn->query("
                 INSERT INTO notifications (user_id, title, message, type)
-                VALUES ($farmer_id, '$title', '$message', 'pest_review')
+                VALUES ($farmer_id, '$title', '$message', 'pest')
             ");
         }
 

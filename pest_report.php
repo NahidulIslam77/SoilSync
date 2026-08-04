@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $uid,
                     'New Pest Report Submitted',
                     'Your pest report has been submitted successfully from $district.',
-                    'pest_report',
+                    'pest',
                     0,
                     NOW()
                 )
@@ -291,7 +291,7 @@ include 'layout.php';
         📍 Detect My Exact Location
     </button>
 
-    <div id="gpsStatus" style="margin:10px 0;padding:12px;border-radius:8px;background:#f5f5f5;">
+    <div id="gpsStatus" style="margin:10px 0;padding:12px;border-radius:8px;">
         ⏳ Waiting for location...
     </div>
 

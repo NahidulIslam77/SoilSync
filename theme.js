@@ -15,8 +15,8 @@ function applyTheme(theme) {
   const btn = document.getElementById('themeToggle');
   if (btn) {
     btn.innerHTML = theme === 'dark'
-      ? '<span>☀️</span> Light Mode'
-      : '<span>🌙</span> Dark Mode';
+      ? '<span>☀️</span> Light'
+      : '<span>🌙</span> Dark';
   }
 }
 

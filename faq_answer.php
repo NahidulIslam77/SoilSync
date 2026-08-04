@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $farmer = $conn->query("SELECT user_id FROM questions WHERE id=$qid")->fetch_assoc();
     $fid = (int)$farmer['user_id'];
     $conn->query("INSERT INTO notifications (user_id, title, message, type)
-        VALUES ($fid, 'Answer Received', 'Expert answered your question.', 'faq')");
+        VALUES ($fid, 'Answer Received', 'Expert answered your question.', 'advisory')");
 
     header("Location: faq_manage.php");
     exit;

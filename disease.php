@@ -3,7 +3,7 @@ require_once 'db.php';
 requireLogin();
 $pageTitle = 'Disease & Solution';
 $activeNav = 'disease';
-
+// url theke
 $selectedCrop = (int)($_GET['crop_id'] ?? 0);
 $selectedDisease = (int)($_GET['disease_id'] ?? 0);
 

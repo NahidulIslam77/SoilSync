@@ -235,44 +235,79 @@ include 'layout.php';
 <?php endif; ?>
 
 <!-- TODAY AVERAGE PRICE -->
-<?php if($isGlobal): ?>
+ <?php if($isGlobal): ?>
 
 <div class="card mb-20">
+
   <div class="card-title">
     🌍 Today Average Price in Bangladesh
   </div>
 
-  <table style="width:100%">
-    <tr>
-      <th align="left">Crop</th>
-      <th align="right">Average Price</th>
-    </tr>
-
 <?php
 $todayAvg = $conn->query("
-SELECT c.name AS crop_name,
-AVG(mp.price) AS avg_price
+SELECT
+    c.name AS crop_name,
+    AVG(mp.price) AS avg_price
 FROM market_prices mp
 JOIN crops c ON mp.crop_id = c.id
 WHERE mp.date = CURDATE()
 GROUP BY mp.crop_id
 ORDER BY avg_price DESC
 ");
-
-while($row = $todayAvg->fetch_assoc()):
 ?>
 
-<tr>
-  <td><?= $row['crop_name'] ?></td>
+<table style="width:100%;border-collapse:collapse;margin-top:12px;">
 
-  <td align="right">
-    ৳<?= number_format($row['avg_price'],2) ?>
-  </td>
-</tr>
+    <thead>
+        <tr>
+            <th style="
+                text-align:left;
+                padding:12px;
+                border-bottom:1px solid #e5e7eb;
+            ">
+                Crop
+            </th>
 
-<?php endwhile; ?>
+            <th style="
+                text-align:right;
+                padding:12px;
+                border-bottom:1px solid #e5e7eb;
+            ">
+                Average Price
+            </th>
+        </tr>
+    </thead>
 
-  </table>
+    <tbody>
+
+    <?php while($row = $todayAvg->fetch_assoc()): ?>
+
+        <tr>
+
+            <td style="
+                padding:12px;
+                border-bottom:1px solid #f1f5f9;
+            ">
+                <?= htmlspecialchars($row['crop_name']) ?>
+            </td>
+
+            <td style="
+                padding:12px;
+                text-align:right;
+                border-bottom:1px solid #f1f5f9;
+                font-weight:700;
+            ">
+                ৳<?= number_format($row['avg_price'], 2) ?>
+            </td>
+
+        </tr>
+
+    <?php endwhile; ?>
+
+    </tbody>
+
+</table>
+
 </div>
 
 <?php endif; ?>

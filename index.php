@@ -25,11 +25,12 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 56px; height: 68px;
-      background: rgba(var(--bg2-rgb,255,255,255), 0.88);
+      /* background: rgba(var(--bg2-rgb,255,255,255), 0.88); */
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
       transition: all 0.3s;
+      font-weight: 900;
     }
     .land-nav.scrolled { box-shadow: var(--shadow-md); }
     .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -43,12 +44,12 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
     }
     .nav-logo-name {
       font-family: var(--font-display);
-      font-size: 20px; font-weight: 900; color: var(--text);
+      font-size: 20px; font-weight: 900; color: var(--text2);
     }
     .nav-links { display: flex; align-items: center; gap: 4px; }
     .nav-links a {
       padding: 7px 14px; border-radius: 50px;
-      font-size: 13.5px; font-weight: 500; color: var(--text2);
+      font-size: 13.5px; font-weight: 900; color: var(--text2);
       transition: all var(--transition);
     }
     .nav-links a:hover { background: var(--surface2); color: var(--text); }
@@ -249,7 +250,7 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
     .feat-card-land:hover::after { transform: scaleY(1); }
     .feat-card-land.new-feat { border-color: var(--gold); }
     .feat-card-land.new-feat::before {
-      content: '✨ New'; position: absolute; top: 14px; right: 14px;
+      content: '★ New'; position: absolute; top: 14px; right: 14px;
       font-size: 10px; font-family: var(--font-mono); font-weight: 700;
       background: var(--gold-light); color: var(--gold);
       padding: 3px 8px; border-radius: 20px; letter-spacing: 0.5px;
@@ -275,7 +276,7 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
       margin-bottom: 0;
     }
     .fc-banner::before {
-      content: '🪪'; position: absolute;
+      content: ''; position: absolute;
       right: -10px; top: -30px; font-size: 200px; opacity: 0.07;
     }
     .fc-banner-text { flex: 1; min-width: 260px; }
@@ -331,7 +332,7 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
 
     /* ── TESTIMONIAL / FARMER QUOTE ───────────────────────── */
     .quotes-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
       gap: 18px; margin-top: 48px;
     }
     .quote-card {
@@ -428,23 +429,33 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
 
 <nav class="land-nav" id="landNav">
   <a href="index.php" class="nav-logo">
-    <div class="nav-logo-badge">🌱</div>
+    <div class="nav-logo-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color:#fff"><path d="M17 8C8 10 5.9 16.17 3.82 22a22 22 0 0 0 15.18-9C19 13 20 9 17 8z"/><path d="M3.82 22c2-2 7.5-7 13.18-7"/></svg>
+    </div>
     <div class="nav-logo-name">SoilSync</div>
   </a>
 
   <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#farmers-card">Farmers Card</a>
-    <a href="#how">How It Works</a>
-    <a href="#cta">Get Started</a>
+    <a href="#features"><?= t('land_features') ?></a>
+    <a href="#farmers-card"><?= t('nav_farmers_card') ?></a>
+    <a href="#how"><?= currentLang()==='bn' ? 'কিভাবে কাজ করে' : 'How It Works' ?></a>
+    <a href="#cta"><?= t('land_get_started') ?></a>
   </div>
 
   <div class="nav-actions">
-    <button class="btn btn-ghost btn-sm theme-btn" id="themeToggle" onclick="toggleTheme()">
-      <span>🌙</span> Dark Mode
+    <button class="btn btn-outline btn-primary btn-sm theme-btn" id="themeToggle" onclick="toggleTheme()">
+      <span class="tb-icon" id="themeIcon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </span>
+      <span id="themeLabel"><?= t('topbar_dark_mode') ?></span>
     </button>
-    <a href="auth.php" class="btn btn-outline btn-sm">Login</a>
-    <a href="auth.php?tab=register" class="btn btn-primary btn-sm">SignUp</a>
+    <?php $sl = currentLang()==='en' ? 'bn' : 'en'; ?>
+    <a href="?lang=<?= $sl ?>" class="btn btn-outline btn-primary btn-sm" style="gap:5px;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <?= currentLang()==='en' ? 'বাংলা' : 'English' ?>
+    </a>
+    <a href="auth.php" class="btn btn-outline btn-md"><?= t('btn_login') ?></a>
+    <a href="auth.php?tab=register" class="btn btn-outline btn-primary btn-md"><?= t('btn_register') ?></a>
   </div>
 </nav>
 
@@ -454,43 +465,50 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
   <div class="hero-blob2"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow">🌾 Bangladesh's Smart Farming Platform · 2026</div>
+    <div class="hero-eyebrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> <?= t('land_hero_eyebrow') ?> </div> <br>
+    <div class="hero-eyebrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> FROM SOIL TO SYSTEM </div>
 
+    <?php if(currentLang()==='bn'): ?>
+    <h1 class="hero-title">
+      স্মার্টভাবে<br>
+      চাষ করুন,<br>
+      ভালো <span class="hl">ফলন পান।</span>
+    </h1>
+    <?php else: ?>
     <h1 class="hero-title">
       Farm<br>
       Smartly,<br>
       Earn <span class="hl">More.</span>
     </h1>
+    <?php endif; ?>
 
-    <p class="hero-desc">
-      SoilSync is built for the farmers of Bangladesh — real-time pest alerts, disease solutions, smart irrigation advice, market prices, and government Farmers Card benefits all in one place.
-    </p>
+    <p class="hero-desc"><?= t('land_hero_desc') ?></p>
 
     <div class="hero-actions">
       <a href="auth.php?tab=register" class="btn-hero-primary">
-        Start Now — It's Free <span>→</span>
+        <?= t('land_get_started') ?> <span>→</span>
       </a>
       <a href="#features" class="btn-hero-outline">
-        <span>▾</span> Explore Features
+        <span>▾</span> <?= currentLang()==='bn' ? 'বৈশিষ্ট্য দেখুন' : 'Explore Features' ?>
       </a>
     </div>
   </div>
 
   <div class="hero-right">
     <div class="float-card">
-      <div class="float-card-label">👨‍🌾 Registered Farmers</div>
+      <div class="float-card-label"><?= currentLang()==='bn' ? 'নিবন্ধিত কৃষক' : 'Registered Farmers' ?></div>
       <div class="float-card-val"><?= number_format($totalFarmers) ?>+</div>
-      <div class="float-card-sub">Active Users</div>
-      <div class="float-card-live"><div class="live-dot"></div> Live Data</div>
+      <div class="float-card-sub"><?= currentLang()==='bn' ? 'সক্রিয় ব্যবহারকারী' : 'Active Users' ?></div>
+      <div class="float-card-live"><div class="live-dot"></div> <?= currentLang()==='bn' ? 'লাইভ ডেটা' : 'Live Data' ?></div>
     </div>
     <div class="float-card">
-      <div class="float-card-label">🐛 Pest Reports</div>
+      <div class="float-card-label"><?= currentLang()==='bn' ? 'পোকার প্রতিবেদন' : 'Pest Reports' ?></div>
       <div class="float-card-val"><?= number_format($totalReports) ?>+</div>
-      <div class="float-card-sub">From all over Bangladesh</div>
-      <div class="float-card-live"><div class="live-dot"></div> Real-time</div>
+      <div class="float-card-sub"><?= currentLang()==='bn' ? 'সারা বাংলাদেশ থেকে' : 'From all over Bangladesh' ?></div>
+      <div class="float-card-live"><div class="live-dot"></div> <?= currentLang()==='bn' ? 'রিয়েল-টাইম' : 'Real-time' ?></div>
     </div>
     <div class="float-card">
-      <div class="float-card-label">🌦️ Weather Updates</div>
+      <div class="float-card-label">Weather Updates</div>
       <div class="float-card-val">64</div>
       <div class="float-card-sub">Districts Data Coverage</div>
       <div class="float-card-live"><div class="live-dot"></div> Daily Updates</div>
@@ -507,12 +525,38 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
 <div class="feat-strip">
   <div class="feat-strip-inner">
     <?php
+    $svgPest = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a5 5 0 0 1 5 5v3H7V7a5 5 0 0 1 5-5z"/><path d="M7 10v4a5 5 0 0 0 10 0v-4"/></svg>';
+    $svgShield = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+    $svgDrop = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>';
+    $svgLeaf = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M17 8C8 10 5.9 16.17 3.82 22a22 22 0 0 0 15.18-9C19 13 20 9 17 8z"/></svg>';
+    $svgCalendar = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+    $svgDollar = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';
+    $svgNotif = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>';
+    $svgCloud = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>';
+    $svgMap = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>';
+    $svgRotate = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="1 4 1 10 7 10"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>';
+    $svgBank = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="9" width="18" height="13" rx="2"/><path d="M8 9V5a4 4 0 0 1 8 0v4"/></svg>';
+    $svgCard = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
+    $svgGlobe = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+    $svgQ = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+
+    $bn = currentLang() === 'bn';
     $strips = [
-      ['🐛','Pest Monitoring'],['🦠','Disease Solutions'],['💧','Smart Irrigation'],
-      ['🌱','Seed Finder'],['📅','Crop Tracking'],['💰','Market Prices'],
-      ['📢','Daily Advisory'],['🌡️','Weather Info'],['🔔','Smart Alerts'],
-      ['🗺️','Land Management'],['🔄','Crop Rotation'],['🏦','Loan Info'],
-      ['🪪','Farmers Card'],['🌍','Outbreak Map'],['❓','Expert Q&A'],
+      [$svgPest,     $bn ? 'পোকা পর্যবেক্ষণ' : 'Pest Monitoring'],
+      [$svgShield,   $bn ? 'রোগ সমাধান' : 'Disease Solutions'],
+      [$svgDrop,     $bn ? 'স্মার্ট সেচ' : 'Smart Irrigation'],
+      [$svgLeaf,     $bn ? 'বীজ অনুসন্ধান' : 'Seed Finder'],
+      [$svgCalendar, $bn ? 'ফসল ট্র্যাকিং' : 'Crop Tracking'],
+      [$svgDollar,   $bn ? 'বাজার মূল্য' : 'Market Prices'],
+      [$svgNotif,    $bn ? 'দৈনিক পরামর্শ' : 'Daily Advisory'],
+      [$svgCloud,    $bn ? 'আবহাওয়া তথ্য' : 'Weather Info'],
+      [$svgNotif,    $bn ? 'স্মার্ট সতর্কতা' : 'Smart Alerts'],
+      [$svgMap,      $bn ? 'জমি ব্যবস্থাপনা' : 'Land Management'],
+      [$svgRotate,   $bn ? 'ফসল পরিক্রমা' : 'Crop Rotation'],
+      [$svgBank,     $bn ? 'ঋণ তথ্য' : 'Loan Info'],
+      [$svgCard,     $bn ? 'কৃষক কার্ড' : 'Farmers Card'],
+      [$svgGlobe,    $bn ? 'প্রাদুর্ভাব মানচিত্র' : 'Outbreak Map'],
+      [$svgQ,        $bn ? 'বিশেষজ্ঞ Q&A' : 'Expert Q&A'],
     ];
     $all = array_merge($strips, $strips);
     foreach ($all as $s): ?>
@@ -529,19 +573,19 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
   <div class="stats-band-inner">
     <div class="stat-band-item">
       <div class="stat-band-val"><?= number_format($totalFarmers) ?>+</div>
-      <div class="stat-band-label">👨‍🌾 Registered Farmers</div>
+      <div class="stat-band-label"><?= t('land_stats_farmers') ?></div>
     </div>
     <div class="stat-band-item">
       <div class="stat-band-val"><?= number_format($totalFields) ?>+</div>
-      <div class="stat-band-label">🗺️ Registered Fields</div>
+      <div class="stat-band-label"><?= t('land_stats_fields') ?></div>
     </div>
     <div class="stat-band-item">
       <div class="stat-band-val"><?= number_format($totalReports) ?>+</div>
-      <div class="stat-band-label">🐛 Pest Reports</div>
+      <div class="stat-band-label"><?= t('land_stats_reports') ?></div>
     </div>
     <div class="stat-band-item">
       <div class="stat-band-val">64</div>
-      <div class="stat-band-label">📍 District Coverage</div>
+      <div class="stat-band-label"><?= currentLang()==='bn' ? 'জেলা কভারেজ' : 'District Coverage' ?></div>
     </div>
   </div>
 </div>
@@ -560,24 +604,39 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
 
     <div class="features-grid reveal-stagger">
       <?php
+      $ic = [
+        'map'    => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>',
+        'crop'   => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M12 22V12"/><path d="M5 12C5 8.5 7 5 12 5s7 3.5 7 7"/><path d="M12 12C10 9 7 8 5 9"/><path d="M12 12c2-3 5-4 7-3"/></svg>',
+        'pest'   => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M12 2a5 5 0 0 1 5 5v3H7V7a5 5 0 0 1 5-5z"/><path d="M7 10v4a5 5 0 0 0 10 0v-4"/><path d="M4 10h3M17 10h3"/></svg>',
+        'shield' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+        'drop'   => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
+        'leaf'   => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M17 8C8 10 5.9 16.17 3.82 22a22 22 0 0 0 15.18-9C19 13 20 9 17 8z"/></svg>',
+        'rotate' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>',
+        'globe'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+        'dollar' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+        'signal' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+        'bank'   => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><rect x="3" y="9" width="18" height="13" rx="2"/><path d="M8 9V5a4 4 0 0 1 8 0v4"/><line x1="12" y1="13" x2="12" y2="17"/></svg>',
+        'qa'     => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+      ];
+      $bn = currentLang() === 'bn';
       $feats = [
-        ['01','🗺️','Land Management','Track all your fields including soil type, area, and location. Organize land for smart planning.','Phase 1',false],
-        ['02','🌾','Crop Tracking','Record what you planted and when. Monitor growth from sowing to harvesting.','Phase 1',false],
-        ['03','🐛','Pest Monitoring','Instantly report pest outbreaks — including location, crop type, and severity.','Real-time',false],
-        ['04','🦠','Disease & Solutions','Select crop to identify diseases and get expert-recommended solutions and pesticides.','AI-Powered',false],
-        ['05','💧','Smart Irrigation','Weather-based irrigation advice. Rain in the forecast? Skip it. Dry forecast? Irrigate now.','Automated',false],
-        ['06','🌱','Seed Finder','Find the best seed varieties for your crops. Filter by yield potential and pest resistance.','Smart Filter',false],
-        ['07','🔄','Crop Rotation Advisor','Next crop recommendations based on previous crop and soil type. Protect soil health.','Data-driven',true],
-        ['08','🗺️','Outbreak Map','View live map of pest attacks in your district. Be forewarned.','Live Map',false],
-        ['09','💰','Market Prices','Check live crop prices at nearby markets. Sell at the right time for maximum profit.','Live Data',false],
-        ['10','📢','Daily Advisory','Weather alerts, pest warnings, and daily agricultural advice for your region.','Live Feed',false],
-        ['11','🏦','Loan Info Hub','Compare agricultural loans, get personalized recommendations, and find nearby bank offices.','Smart Compare',true],
-        ['12','❓','Expert Q&A','Ask an expert directly about any agricultural problem and get quick answers.','Live Support',false],
+        ['01','map',   $bn?'জমি ব্যবস্থাপনা':'Land Management',   $bn?'মাটির ধরন, আয়তন ও অবস্থান সহ সব জমি ট্র্যাক করুন।':'Track all your fields including soil type, area, and location.',   $bn?'ধাপ ১':'Phase 1',false],
+        ['02','crop',  $bn?'ফসল ট্র্যাকিং':'Crop Tracking',        $bn?'কী রোপণ করেছেন তা রেকর্ড করুন। রোপণ থেকে ফসল তোলা পর্যন্ত পর্যবেক্ষণ করুন।':'Record what you planted and when. Monitor growth from sowing to harvesting.', $bn?'ধাপ ১':'Phase 1',false],
+        ['03','pest',  $bn?'পোকা পর্যবেক্ষণ':'Pest Monitoring',     $bn?'তাৎক্ষণিকভাবে পোকার আক্রমণ রিপোর্ট করুন — অবস্থান, ফসলের ধরন ও তীব্রতা সহ।':'Instantly report pest outbreaks including location, crop type, and severity.', $bn?'রিয়েল-টাইম':'Real-time',false],
+        ['04','shield',$bn?'রোগ ও সমাধান':'Disease & Solutions',    $bn?'ফসল নির্বাচন করে রোগ চিহ্নিত করুন এবং বিশেষজ্ঞ-প্রস্তাবিত সমাধান পান।':'Select crop to identify diseases and get expert-recommended solutions.', $bn?'AI-চালিত':'AI-Powered',false],
+        ['05','drop',  $bn?'স্মার্ট সেচ':'Smart Irrigation',         $bn?'আবহাওয়া-ভিত্তিক সেচ পরামর্শ। বৃষ্টির পূর্বাভাস? এড়িয়ে যান। শুষ্ক পূর্বাভাস? সেচ দিন।':'Weather-based irrigation advice. Rain forecast? Skip. Dry forecast? Irrigate now.', $bn?'স্বয়ংক্রিয়':'Automated',false],
+        ['06','leaf',  $bn?'বীজ অনুসন্ধান':'Seed Finder',           $bn?'আপনার ফসলের জন্য সেরা বীজ খুঁজুন। ফলন ও কীটনাশক প্রতিরোধ অনুযায়ী ফিল্টার করুন।':'Find the best seed varieties for your crops. Filter by yield potential.', $bn?'স্মার্ট ফিল্টার':'Smart Filter',false],
+        ['07','rotate',$bn?'ফসল পরিক্রমা পরামর্শক':'Crop Rotation Advisor',$bn?'আগের ফসল ও মাটির ধরনের উপর ভিত্তি করে পরবর্তী ফসলের সুপারিশ।':'Next crop recommendations based on previous crop and soil type.', $bn?'ডেটা-চালিত':'Data-driven',true],
+        ['08','globe', $bn?'প্রাদুর্ভাব মানচিত্র':'Outbreak Map',    $bn?'আপনার জেলায় পোকার আক্রমণের লাইভ মানচিত্র দেখুন। আগে থেকে সতর্ক থাকুন।':'View live map of pest attacks in your district. Be forewarned.', $bn?'লাইভ ম্যাপ':'Live Map',false],
+        ['09','dollar',$bn?'বাজার মূল্য':'Market Prices',            $bn?'কাছের বাজারে লাইভ ফসলের দাম দেখুন। সর্বোচ্চ মুনাফায় বিক্রি করুন।':'Check live crop prices at nearby markets. Sell at the right time.', $bn?'লাইভ ডেটা':'Live Data',false],
+        ['10','signal',$bn?'দৈনিক পরামর্শ':'Daily Advisory',         $bn?'আপনার এলাকার জন্য আবহাওয়া সতর্কতা, পোকার সতর্কতা ও দৈনিক কৃষি পরামর্শ।':'Weather alerts, pest warnings, and daily agricultural advice.', $bn?'লাইভ ফিড':'Live Feed',false],
+        ['11','bank',  $bn?'ঋণ তথ্য কেন্দ্র':'Loan Info Hub',        $bn?'কৃষি ঋণ তুলনা করুন, ব্যক্তিগতকৃত সুপারিশ পান এবং কাছের ব্যাংক অফিস খুঁজুন।':'Compare agricultural loans, get personalized recommendations.', $bn?'স্মার্ট তুলনা':'Smart Compare',true],
+        ['12','qa',    $bn?'বিশেষজ্ঞ Q&A':'Expert Q&A',              $bn?'যেকোনো কৃষি সমস্যায় সরাসরি একজন বিশেষজ্ঞকে জিজ্ঞাসা করুন এবং দ্রুত উত্তর পান।':'Ask an expert directly about any agricultural problem and get quick answers.', $bn?'লাইভ সাপোর্ট':'Live Support',false],
       ];
       foreach ($feats as $f): ?>
       <div class="feat-card-land reveal-item <?= $f[5] ? 'new-feat' : '' ?>">
         <div class="feat-num"><?= $f[0] ?></div>
-        <span class="feat-emoji"><?= $f[1] ?></span>
+        <span class="feat-emoji" style="font-size:0;line-height:0;"><?= $ic[$f[1]] ?></span>
         <h3 class="feat-title-land"><?= $f[2] ?></h3>
         <p class="feat-desc-land"><?= $f[3] ?></p>
         <span class="feat-tag"><?= $f[4] ?></span>
@@ -586,7 +645,6 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
     </div>
   </div>
 </section>
-
 
 <section class="land-section" id="farmers-card"
          style="background:var(--surface2);padding-top:80px;padding-bottom:80px">
@@ -603,7 +661,7 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
     <div class="fc-banner reveal">
       <div class="fc-banner-text">
         <div class="fc-banner-eyebrow">🇧🇩 Govt Initiative · Visa + Sonali Bank</div>
-        <div class="fc-banner-title">🪪 Farmers Card Hub</div>
+        <div class="fc-banner-title">Farmers Card Hub</div>
         <div class="fc-banner-desc">
           Enter your card number — SoilSync will show which benefits you are getting, which you haven't received yet, and the total value of benefits per year. Free for 27.5 million farmers.
         </div>
@@ -615,17 +673,17 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
                   transition:all var(--transition);text-decoration:none;"
            onmouseover="this.style.transform='translateY(-2px)'"
            onmouseout="this.style.transform=''">
-          🪪 Link Card →
+          Link Card →
         </a>
       </div>
 
       <div class="fc-benefits">
         <?php
         $fcBenefits = [
-          ['🌾', 'Subsidized Agricultural Inputs', 'Fertilizer and seeds cheaper than market price'],
-          ['🏦', 'Easy Agricultural Loans', 'Only 6% interest at Sonali Bank'],
-          ['💸', 'Direct Cash Subsidy', '2,500 BDT directly to bank every year'],
-          ['🛡️', 'Crop Insurance Benefits', 'Protection against flood, drought, and pest damage'],
+          ['&#10003;', 'Subsidized Agricultural Inputs', 'Fertilizer and seeds cheaper than market price'],
+          ['&#10003;', 'Easy Agricultural Loans', 'Only 6% interest at Sonali Bank'],
+          ['&#10003;', 'Direct Cash Subsidy', '2,500 BDT directly to bank every year'],
+          ['&#10003;', 'Crop Insurance Benefits', 'Protection against flood, drought, and pest damage'],
         ];
         foreach ($fcBenefits as $b): ?>
         <div class="fc-benefit">
@@ -680,22 +738,24 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
     <div class="quotes-grid">
       <?php
       $quotes = [
-        ['With SoilSync I knew in advance that brown plant hoppers were attacking my district. I took timely action and saved my crop.','👨‍🌾','Rahim Mia','Sylhet District'],
-        ['From the Farmers Card Hub I learned I am eligible for over 8,000 BDT in government benefits annually. I didn\'t even know before.','👩‍🌾','Sufia Begum','Rajshahi District'],
-        ['The Crop Rotation Advisor suggested planting mustard after paddy. The soil fertility has been much better this year.','👨‍🌾','Karim Sheikh','Barishal District'],
+        ['With SoilSync I knew in advance that brown plant hoppers were attacking my district. I took timely action and saved my crop.','NT','Nazha Tarannum','Rajshahi District'],
+        ['From the Farmers Card Hub I learned I am eligible for over 8,000 BDT in government benefits annually. I didn\'t even know before.','MN','Md. Nurnove','Sylhet District'],
+        ['Following the Crop Rotation Advisor’s recommendation to plant mustard after paddy, soil fertility has improved noticeably this year.','NI','Nahidul Islam','Narsingdi District'],
+        ['The Crop Rotation Advisor suggested planting mustard after paddy. The soil fertility has been much better this year.','MH','Maherab Hossain','Chittagong District'],
       ];
       foreach ($quotes as $q): ?>
       <div class="quote-card reveal-item">
-        <div class="quote-stars">⭐⭐⭐⭐⭐</div>
+        <div class="quote-stars" style="color:var(--gold,#e8a000);font-size:14px;letter-spacing:2px;margin-bottom:12px;">★★★★★</div>
         <p class="quote-text">"<?= $q[0] ?>"</p>
         <div class="quote-author">
           <div class="quote-av"><?= $q[1] ?></div>
           <div>
             <div class="quote-name"><?= $q[2] ?></div>
-            <div class="quote-loc">📍 <?= $q[3] ?></div>
+            <div class="quote-loc"><?= $q[3] ?></div>
           </div>
         </div>
       </div>
+      
       <?php endforeach; ?>
     </div>
   </div>
@@ -703,13 +763,13 @@ $totalAdvisory = $conn->query("SELECT COUNT(*) AS c FROM advisory_feed")->fetch_
 
 
 <section class="cta-section" id="cta">
-  <h2 class="cta-title reveal">Start Smart Farming Today 🌾</h2>
+  <h2 class="cta-title reveal">Start Smart Farming Today</h2>
   <p class="cta-desc reveal">
     Join SoilSync — registration is free, powerful from day one.<br>
     We stand by the 27.5 million farmers of Bangladesh.
   </p>
   <div class="cta-btns reveal">
-    <a href="auth.php?tab=register" class="btn-cta-white">Create a Free Account →</a>
+    <a href="auth.php?tab=register" class="btn-cta-white">Create a Account →</a>
     <a href="auth.php" class="btn-cta-outline">Already a member? Login</a>
   </div>
 </section>

@@ -1,12 +1,14 @@
 /* ============================================================
-   SoilSync — Master Stylesheet v2.0
+   SoilSync — Developed by <SleepingBot/>
    Fonts: Fraunces (display) + Cabinet Grotesk (body)
    Themes: Light + Dark, toggled via [data-theme="dark"]
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 /* ── TOKENS ─────────────────────────────────────────────── */
+
+/* maherab -------------------------------- */
 :root {
   /* Light palette */
   --bg:           #f2f7ed;
@@ -55,40 +57,156 @@
   --sidebar-w:    252px;
   --topbar-h:     64px;
 
-  --font-display: 'Fraunces', Georgia, serif;
+  /* --font-display: 'Fraunces', Georgia, serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --font-mono:    'JetBrains Mono', monospace; */
+
+  --font-display: 'Merriweather', serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   --transition:   0.22s cubic-bezier(0.4,0,0.2,1);
 }
 
 /* Dark mode tokens */
+
+#gpsStatus{
+
+  background: var(--bg);
+
+}
+/* maherab -------------------------------- */
 [data-theme="dark"] {
+  /* =========================
+     Backgrounds
+  ========================= */
+  --bg:            #0f1711;
+  --bg2:           #141d16;
+  --bg3:           #1b261d;
+
+  /* =========================
+     Surfaces / Cards
+  ========================= */
+  --surface:       #18231b;
+  --surface2:      #1f2d22;
+  --surface3:      #28392c;
+
+  /* =========================
+     Borders
+  ========================= */
+  --border:        #324638;
+  --border2:       #45604c;
+
+  /* =========================
+     Typography
+  ========================= */
+  --text:          #eef4eb;
+  --text2:         #c9d7c3;
+  --text3:         #97ab93;
+  --text4:         #6f836b;
+
+  /* =========================
+     Agriculture Green
+  ========================= */
+  --accent:        #5a9444;
+  --accent2:       #6cad53;
+  --accent3:       #86c96a;
+
+  --accent-glow:   rgba(108,173,83,0.20);
+  --accent-light:  rgba(108,173,83,0.08);
+
+  /* =========================
+     Harvest / Wheat Accent
+  ========================= */
+  --gold:          #d9b75f;
+  --gold-light:    rgba(217,183,95,0.12);
+
+  /* =========================
+     Status Colors
+  ========================= */
+  --danger:        #d06b6b;
+  --danger-light:  rgba(208,107,107,0.10);
+
+  --warn:          #d9a14d;
+  --warn-light:    rgba(217,161,77,0.10);
+
+  --info:          #5a9ac7;
+  --info-light:    rgba(90,154,199,0.10);
+
+  --success:       #57b073;
+  --success-light: rgba(87,176,115,0.10);
+
+  /* =========================
+     Navbar Specific
+  ========================= */
+  --navbar-bg:     #111a13;
+  --navbar-border: #2d4233;
+
+  --nav-text:      #d4ddd0;
+  --nav-hover:     #9acb73;
+  --nav-active:    #b7df8d;
+
+  /* =========================
+     Buttons
+  ========================= */
+  --btn-primary:   #5a9444;
+  --btn-primary-hover: #6cad53;
+
+  --btn-outline:   #45604c;
+  --btn-outline-hover: #2a3b2f;
+
+  /* =========================
+     Shadows
+  ========================= */
+  --shadow-xs:     0 1px 4px rgba(0,0,0,0.25);
+  --shadow-sm:     0 2px 12px rgba(0,0,0,0.32);
+  --shadow-md:     0 4px 24px rgba(0,0,0,0.40);
+  --shadow-lg:     0 8px 48px rgba(0,0,0,0.50);
+  --shadow-xl:     0 16px 72px rgba(0,0,0,0.60);
+
+  /* =========================
+     Optional Gradients
+  ========================= */
+  --gradient-primary: linear-gradient(
+    135deg,
+    #5a9444,
+    #6cad53
+  );
+
+  --gradient-hero: linear-gradient(
+    135deg,
+    #1f2d22 0%,
+    #243b28 50%,
+    #5a9444 100%
+  );
+}
+
+/* [data-theme="dark"] { */
   /* Backgrounds — slightly warmer, not pitch black */
-  --bg:           #0f1a0a;
+  /* --bg:           #0f1a0a;
   --bg2:          #161f10;
   --bg3:          #1c2914;
   --surface:      #1c2914;
   --surface2:     #223018;
   --surface3:     #293c1e;
   --border:       #2e4420;
-  --border2:      #3a5428;
+  --border2:      #3a5428; */
 
   /* Text — toned down from near-white to softer warm off-white */
-  --text:         #cfdfc0;
+  /* --text:         #cfdfc0;
   --text2:        #92b074;
   --text3:        #5e8040;
-  --text4:        #405830;
+  --text4:        #405830; */
 
   /* Accent — desaturated, less neon */
-  --accent:       #459624;
+  /* --accent:       #459624;
   --accent2:      #5aac34;
   --accent3:      #72c048;
   --accent-glow:  rgba(90,172,52,0.18);
-  --accent-light: #1a3010;
+  --accent-light: #1a3010; */
 
   /* Status colors — all pulled back ~15% brightness & saturation */
-  --gold:         #c8a428;
+  /* --gold:         #c8a428;
   --gold-light:   #251e08;
   --danger:       #c84848;
   --danger-light: #220a0a;
@@ -104,7 +222,7 @@
   --shadow-md:    0 4px 24px rgba(0,0,0,0.4);
   --shadow-lg:    0 8px 48px rgba(0,0,0,0.5);
   --shadow-xl:    0 16px 64px rgba(0,0,0,0.6);
-}
+} */
 
 /* ── RESET ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -841,8 +959,8 @@ select {
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 
 .reveal-stagger .reveal-item {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: translateY(0px);
   transition: opacity 0.55s, transform 0.55s;
 }
 

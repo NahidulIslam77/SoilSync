@@ -396,16 +396,17 @@ include 'layout.php';
         <?= $inCompare ? '✕ Remove' : '⚖️ Compare' ?>
       </button>
     </form>
-  </div>
-
-  <!-- Phone link if available -->
+      <!-- Phone link if available -->
   <?php if ($prod['prov_phone']): ?>
-  <div style="margin-top:8px;text-align:center">
+  <div >
     <a href="tel:<?= $prod['prov_phone'] ?>" class="btn btn-ghost btn-sm" style="font-size:12px">
       📞 <?= htmlspecialchars($prod['prov_phone']) ?>
     </a>
   </div>
   <?php endif; ?>
+  </div>
+
+
 
 </div>
 <?php endwhile; ?>

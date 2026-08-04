@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_price'])) {
         ");
 
         $stmt->bind_param(
-            "iiddss",
+            "iidsss",
             $crop_id,
             $location_id,
             $price,

@@ -53,7 +53,7 @@ if ($filterType) {
 }
 if ($filterRead === 'unread') $where[] = "is_read = 0";
 if ($filterRead === 'read')   $where[] = "is_read = 1";
-
+//implode() array join করে।
 $whereSQL = implode(' AND ', $where);
 
 $notifications = $conn->query("SELECT * FROM notifications WHERE $whereSQL ORDER BY created_at DESC");
@@ -85,7 +85,7 @@ $typeConfig = [
       🔔 Notifications
     </h1>
     <p style="color:var(--text3);font-size:13px;margin-top:4px">
-      <?= $unreadCount ?> unread · <?= $totalCount ?> total
+      <?= $unreadCount ?> unread · <?= $totalCount ?> total  
     </p>
   </div>
   <div class="flex gap-8">
@@ -269,3 +269,6 @@ function timeAgo($datetime) {
 ?>
 
 <?php include 'layout_end.php'; ?>
+
+
+
