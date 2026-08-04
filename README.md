@@ -10,7 +10,7 @@ Developed as an academic project using **PHP**, **MySQL**, **HTML**, **CSS**, **
 
 **Course:** CSE 3521 – Database Management System (DBMS)
 
-**Department:** Computer Science & Engineering
+**Department:** Computer Science & Engineering (CSE)
 
 **University:** United International University (UIU)
 
